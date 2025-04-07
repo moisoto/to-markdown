@@ -6,13 +6,15 @@ authors = [
     {name = "Moises Soto",email = "35436843+moisoto@users.noreply.github.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.13,<3.14"
 dependencies = [
 ]
 
 [tool.poetry]
 packages = [{include = "to_markdown", from = "src"}]
 
+[tool.poetry.scripts]
+to-markdown = "cli:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
