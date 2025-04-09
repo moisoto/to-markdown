@@ -133,3 +133,57 @@ Now you can run your CLI script by using the following command:
 ```shell
 poetry run to-markdown path-to/document-to-convert.ext
 ```
+
+## Image Recognition
+
+You can also use MarkItDown to generate a markdown that descibes the image.
+
+Here is a sample program (remember to put your own api-key):
+
+```python
+import argparse
+from pathlib import Path
+from markitdown import MarkItDown
+from openai import OpenAI
+
+def main():
+    parser = argparse.ArgumentParser(description="Describes any image in Markdown format.")
+    parser.add_argument("filepath", help="Path to the image file")
+    args = parser.parse_args()
+
+    file_path = Path(args.filepath)
+
+    if not file_path.exists():
+        print(f"Error: File '{file_path}' not found")
+        return
+
+    client = OpenAI(api_key="your-api-key")
+
+    md = MarkItDown(llm_client=client, llm_model="gpt-4o")
+    result = md.convert(str(file_path))
+    print(result.text_content)
+
+if __name__ == "__main__":
+    main()
+```
+
+Since this imports OpenAI, you need to run the `poetry add` command:
+
+```shell
+poetry add OpenAI
+```
+
+Also we will update the `pyproject.toml` file:
+
+```toml
+[tool.poetry.scripts]
+to-markdown = "cli:main"
+img-to-markdown = "img2md:main"
+```
+
+Finally to run the img-to-markdown script:
+
+```
+poetry run img-to-markdown path-to/your-image-file
+```
+
