@@ -8,7 +8,8 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.13,<3.14"
 dependencies = [
-    "markitdown[all] (>=0.1.1,<0.2.0)"
+    "markitdown[all] (>=0.1.1,<0.2.0)",
+    "openai (>=1.72.0,<2.0.0)"
 ]
 
 [tool.poetry]
@@ -16,6 +17,7 @@ packages = [{include = "to_markdown", from = "src"}]
 
 [tool.poetry.scripts]
 to-markdown = "cli:main"
+img-to-markdown = "img2md:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
